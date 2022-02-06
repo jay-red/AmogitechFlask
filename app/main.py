@@ -89,13 +89,15 @@ def home_view():
     data = {}
     data["x"] = -1.0
     data["y"] = -1.0
+    data["r"] = -1.0
 
     if len( ellipse_depth ) > 0:
         ellipse_depth = ellipse_depth[-1]
         ellipse_depth.sort( key = lambda x : max( x[1] ), reverse = True )
         cv2.ellipse( raw, ellipse_depth[0], ( 255, 0, 0 ), 3 )
 
-        data["x"] = ellipse_depth[0][0][0];
-        data["y"] = ellipse_depth[0][0][1];
+        data["x"] = ellipse_depth[0][0][0]
+        data["y"] = ellipse_depth[0][0][1]
+        data["r"] = max( ellipse_depth[0][1] ) / 2.0
 
     return dumps( data )
