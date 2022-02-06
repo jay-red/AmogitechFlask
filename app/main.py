@@ -1,6 +1,8 @@
 from flask import Flask, Response, request, json
 from flask_cors import CORS
 
+from werkzeug.utils import secure_filename
+
 app = Flask(__name__)
 
 CORS(app)
@@ -17,5 +19,7 @@ def home_view():
 
     if ( not amogi_file ) or amogi_file.filename == "":
         return "amogi-file is required."
+
+    amogi_file.save( secure_filename( amogi_file.filename ) )
 
     return "hi bro"
