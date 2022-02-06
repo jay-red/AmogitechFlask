@@ -9,4 +9,13 @@ CORS(app)
 def home_view():
     if request.method == "GET":
         return "GET is not allowed on this resource."
+
+    if "amogi-file" not in request.files:
+        return "amogi-file is required."
+
+    amogi_file = request.files["amogi-file"]
+
+    if ( not amogi_file ) or amogi_file.filename == "":
+        return "amogi-file is required."
+
     return "hi bro"
